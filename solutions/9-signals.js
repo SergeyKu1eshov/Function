@@ -8,14 +8,14 @@ const freeEmailDomains = [
 ];
 
 // BEGIN
-export default (emails) => {
-  const domains = emails.map((email) => _.last(email.split('@')));
-  const counts = {};
-  domains.forEach((domain) => {
-    if (freeEmailDomains.includes(domain)) {
-      counts[domain] = _.get(counts, domain, 0) + 1;
-    }
+export default function getFreeDomainsCount (emails) {
+  const domainCounts = {};
+  emails.forEach((email) => {
+  const domain = email.split('@')[1];
+  if (freeEmailDomains.includes(domain)) {
+  domainCounts[domain] = get(domainCounts, domain, 0) + 1;
+  }
   });
-  return counts;
-};
+  return domainCounts;
+  };
 // END
